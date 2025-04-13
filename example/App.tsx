@@ -1,73 +1,34 @@
-import { useEvent } from 'expo';
-import ScreenshotPreventer, { ScreenshotPreventerView } from 'screenshot-preventer';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+/// @ts-nocheck
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { ScreenshotPreventerView } from "screenshot-preventer";
 
 export default function App() {
-  const onChangePayload = useEvent(ScreenshotPreventer, 'onChange');
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{ScreenshotPreventer.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{ScreenshotPreventer.hello()}</Text>
-        </Group>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await ScreenshotPreventer.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <ScreenshotPreventerView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
-        </Group>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+    <View style={{ flex: 1 }}>
+      <ScreenshotPreventerView >
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <Text style={styles.text}>Sensitive Content Here 👀</Text>
+        </View>
+      </ScreenshotPreventerView>
 
-function Group(props: { name: string; children: React.ReactNode }) {
-  return (
-    <View style={styles.group}>
-      <Text style={styles.groupHeader}>{props.name}</Text>
-      {props.children}
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Hello there this content is not protected</Text>
+      </View>
     </View>
   );
 }
 
-const styles = {
-  header: {
-    fontSize: 30,
-    margin: 20,
-  },
-  groupHeader: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  group: {
-    margin: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-  },
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: "#111",
+    justifyContent: "center",
+    alignItems: "center"
   },
-  view: {
-    flex: 1,
-    height: 200,
-  },
-};
+  text: {
+    color: "#111",
+    fontSize: 20
+  }
+});

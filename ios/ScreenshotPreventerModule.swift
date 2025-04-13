@@ -1,6 +1,7 @@
 import ExpoModulesCore
 
 public class ScreenshotPreventerModule: Module {
+   private var hasListeners = false
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
   // See https://docs.expo.dev/modules/module-api for more details about available components.
@@ -10,39 +11,43 @@ public class ScreenshotPreventerModule: Module {
     // The module will be accessible from `requireNativeModule('ScreenshotPreventer')` in JavaScript.
     Name("ScreenshotPreventer")
 
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants([
-      "PI": Double.pi
-    ])
+    View(ScreenshotPreventerView.self) {}
 
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
+        Events("onInactive")
+        Events("onActive")
 
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
-    }
+        OnStartObserving {
+          self.hasListeners = true
 
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
-      ])
-    }
+          NotificationCenter.default.addObserver(
+                  self,
+                  selector: #selector(self.appWillResignActive),
+                  name: UIApplication.willResignActiveNotification,
+                  object: nil
+                )
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of the
-    // view definition: Prop, Events.
-    View(ScreenshotPreventerView.self) {
-      // Defines a setter for the `url` prop.
-      Prop("url") { (view: ScreenshotPreventerView, url: URL) in
-        if view.webView.url != url {
-          view.webView.load(URLRequest(url: url))
+                NotificationCenter.default.addObserver(
+                              self,
+                              selector: #selector(self.didBecomeActiveNotification),
+                              name: UIApplication.didBecomeActiveNotification,
+                              object: nil
+                            )
+        }
+
+        OnStopObserving {
+          self.hasListeners = false
+          NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
+          NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         }
       }
 
-      Events("onLoad")
-    }
-  }
+      @objc
+        func appWillResignActive() {
+          sendEvent("onInactive", ["timestamp": Date().timeIntervalSince1970])
+        }
+
+        @objc
+            func didBecomeActiveNotification() {
+              sendEvent("onActive", ["timestamp": Date().timeIntervalSince1970])
+            }
 }
