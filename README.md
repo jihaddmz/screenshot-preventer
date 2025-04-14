@@ -1,4 +1,4 @@
-# screenshot-preventer
+# app-content-protector
 
 This package is for preventing screenshots and recordings on iOS & Android.
 
@@ -16,7 +16,7 @@ For bare React Native projects, you must ensure that you have [installed and con
 ### Add the package to your npm dependencies
 
 ```
-npm install screenshot-preventer
+npm install app-content-protector
 ```
 
 [//]: # (### Configure for Android)
