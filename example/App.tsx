@@ -7,7 +7,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScreenshotPreventerView >
+      <ScreenshotPreventerView overlayColor="#111">
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
           <Text style={styles.text}>Sensitive Content Here 👀</Text>
         </View>

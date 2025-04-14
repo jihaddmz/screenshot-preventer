@@ -1593,7 +1593,7 @@ PODS:
     - React-logger
     - React-perflogger
     - React-utils (= 0.76.9)
-  - ScreenshotPreventer (0.1.0):
+  - ScreenshotPreventer (0.1.2):
     - ExpoModulesCore
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
@@ -1896,7 +1896,7 @@ SPEC CHECKSUMS:
   React-utils: 54df9ada708578c8ad40d92895d6fed03e0e8a9e
   ReactCodegen: 21a52ccddc6479448fc91903a437dd23ddc7366c
   ReactCommon: bfd3600989d79bc3acbe7704161b171a1480b9fd
-  ScreenshotPreventer: b84542d4f52b643187875f4b9463950a0261d462
+  ScreenshotPreventer: 9ff7a2907b3fc69591074a080ff6cac4977fb146
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: feb4910aba9742cfedc059e2b2902e22ffe9954a
 
