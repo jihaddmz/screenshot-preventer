@@ -12,11 +12,12 @@ npm install screenshot-preventer
 
 
 ```js
-import { multiply } from 'screenshot-preventer';
+import { enable, disable } from 'screenshot-preventer';
 
 // ...
 
-const result = multiply(3, 7);
+enable(); // to prevent screenshots and recordings
+disable(); // to allow screenshots and recordings
 ```
 
 
@@ -27,7 +28,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

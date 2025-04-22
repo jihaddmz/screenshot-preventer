@@ -1,7 +1,7 @@
 {
   "name": "screenshot-preventer",
-  "version": "0.1.0",
-  "description": " ",
+  "version": "0.1.4",
+  "description": "Prevents screen recording and screenshots in React Native apps.",
   "source": "./src/index.tsx",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

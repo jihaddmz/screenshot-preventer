@@ -1,5 +1,9 @@
 import ScreenshotPreventer from './NativeScreenshotPreventer';
 
-export function multiply(a: number, b: number): number {
-  return ScreenshotPreventer.multiply(a, b);
+export function enable() {
+  ScreenshotPreventer.enable();
+}
+
+export function disable() {
+  ScreenshotPreventer.disable();
 }
